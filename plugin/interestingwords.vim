@@ -170,15 +170,8 @@ if !exists('g:interestingWordsDefaultMappings')
     let g:interestingWordsDefaultMappings = 1
 endif
 
-if !hasmapto('<Plug>InterestingWords')
-    nnoremap <silent> <leader>k :call InterestingWords()<cr>
-    nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
-
-    nnoremap <silent> n :call WordNavigation(1)<cr>
-    nnoremap <silent> N :call WordNavigation(0)<cr>
-endif
-
-if g:interestingWordsDefaultMappings
+if hasmapto('<Plug>InterestingWords')
+    let g:interestingWordsDefaultMappings = 0
     nnoremap <silent> <unique> <script> <Plug>InterestingWords
                 \ :call InterestingWords()<cr>
     nnoremap <silent> <unique> <script> <Plug>InterestingWordsClear
@@ -187,4 +180,12 @@ if g:interestingWordsDefaultMappings
                 \ :call WordNavigation(1)<cr>
     nnoremap <silent> <unique> <script> <Plug>InterestingWordsBackward
                 \ :call WordNavigation(0)<cr>
+endif
+
+if g:interestingWordsDefaultMappings == 1
+    nnoremap <silent> <leader>k :call InterestingWords()<cr>
+    nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
+
+    nnoremap <silent> n :call WordNavigation(1)<cr>
+    nnoremap <silent> N :call WordNavigation(0)<cr>
 endif
